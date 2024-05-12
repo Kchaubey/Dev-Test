@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mynodeapp   # Choose a valid name here
+  namespace: kube-system
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Kchaubey/Dev-Test.git
+    path: Chart
+    targetRevision: 1.16.0
+    helm:
+      valueFiles: 
+        - values.yaml
+      releaseName: chart-release
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: kube-system
